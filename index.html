@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alterlit — боковая лента комментариев (dev)</title>
+    <!-- на сайте эти шрифты уже подключены -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* имитация сайдбара сайта */
+      :root { --aside-width: 350px; --color-9: #245326; --color-10: #245326; --color-11: #245326; --color-12: #666666; }
+      @media (max-width: 1300px) { :root { --aside-width: 280px; } }
+      body { margin: 0; background: #fdf8ef; font-family: 'PT Serif', Helvetica, sans-serif; font-size: 14px; }
+      .side { box-sizing: border-box; width: var(--aside-width); min-height: 100vh; margin-left: auto; padding: 10px 30px;
+              background: #203019 url(https://alterlit.ru/assets/img/texture.jpg); }
+      .line { border: 0; border-top: 1px solid rgba(255,255,255,.2); margin: 20px 0; }
+      @media (max-width: 1300px) { .side { padding: 10px 16px; } }
+    </style>
+  </head>
+  <body>
+    <aside class="side">
+      <hr class="line" />
+      <div id="alterlit-side-comments"></div>
+      <hr class="line" />
+    </aside>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

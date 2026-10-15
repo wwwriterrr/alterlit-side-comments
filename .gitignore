@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.env.local
+*.log
+tsconfig.tsbuildinfo
+__pycache__/
+dev-fixtures

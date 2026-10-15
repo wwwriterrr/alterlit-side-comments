@@ -1,0 +1,176 @@
+/* Повторяет прежнюю .side-comments: зелёные «облачка» с хвостиком слева, AltCG — серые.
+   Цвета — переменные сайта (--color-9…12), без них — те же значения. */
+.list {
+  --sc-bg: var(--color-10, #245326);
+  --sc-tail-top: var(--color-9, #245326);
+  --sc-tail-right: var(--color-11, #245326);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: 'PT Serif', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.list *,
+.list *::before,
+.list *::after {
+  box-sizing: border-box;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 0 14px 14px 14px;
+  background-color: var(--sc-bg);
+  color: #fff;
+}
+.item + .item {
+  margin-top: 15px;
+}
+/* хвостик облачка */
+.item::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 0;
+  border: 8px solid transparent;
+  border-top-color: var(--sc-tail-top);
+  border-right-color: var(--sc-tail-right);
+}
+.item[data-site='alt'] {
+  --sc-bg: var(--color-12, #666666);
+  --sc-tail-top: var(--color-12, #666666);
+  --sc-tail-right: var(--color-12, #666666);
+}
+/* новый комментарий — плавно появляется сверху */
+.item[data-fresh] {
+  animation: arrive 0.45s ease-out;
+}
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.avatarLink {
+  flex: none;
+  display: inline-flex;
+}
+.avatar {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #fff;
+  color: #fff;
+  font: bold 12px/1 'PT Serif', Helvetica, sans-serif;
+}
+.list a {
+  color: #fff;
+  text-decoration: none;
+}
+.list a.name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  min-width: 0;
+  font-weight: bold;
+}
+.nameText {
+  overflow-wrap: anywhere;
+}
+.list a.name:hover .nameText,
+.list a.text:hover {
+  text-decoration: underline;
+}
+.badge {
+  flex: none;
+  width: 0.95em;
+  height: 0.95em;
+  fill: #3b6ef3;
+}
+.badge[data-kind='owner'] {
+  fill: #d50000;
+}
+.list a.text {
+  overflow-wrap: anywhere;
+}
+.list a.post {
+  display: block;
+  overflow: hidden;
+  color: rgb(254, 239, 184);
+  font-size: 0.8em;
+  text-decoration: underline;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.list a:focus-visible {
+  outline: 2px solid #e9aa44;
+  outline-offset: 2px;
+}
+
+.note {
+  margin: 0;
+  color: #fff;
+  opacity: 0.7;
+}
+
+/* загрузка — по форме ленты, полупрозрачно */
+.skeleton .item {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+.skeleton .item::before {
+  border-top-color: rgba(255, 255, 255, 0.06);
+  border-right-color: rgba(255, 255, 255, 0.06);
+}
+.ghost {
+  display: block;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  animation: ghost 1.4s ease-in-out infinite;
+}
+.skeleton .avatar {
+  background: rgba(255, 255, 255, 0.12);
+}
+.gName {
+  width: 55%;
+  height: 14px;
+}
+.gLine {
+  width: 100%;
+  height: 14px;
+}
+.gShort {
+  width: 60%;
+  height: 10px;
+}
+@keyframes ghost {
+  50% {
+    opacity: 0.5;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .item[data-fresh],
+  .ghost {
+    animation: none;
+  }
+}
+@media (max-width: 1300px) {
+  .item::before {
+    left: -10px;
+  }
+}
